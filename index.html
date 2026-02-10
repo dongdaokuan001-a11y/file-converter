@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文件转换专家 - 订阅服务</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+        
+        .header h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+        
+        .header p {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-title {
+            font-size: 24px;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .feature-desc {
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        .pricing {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .pricing h2 {
+            font-size: 36px;
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .pricing-subtitle {
+            color: rgba(255,255,255,0.8);
+            font-size: 18px;
+            margin-bottom: 40px;
+        }
+        
+        .plans {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .plan {
+            background: white;
+            border-radius: 25px;
+            padding: 50px 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .plan.popular {
+            transform: scale(1.05);
+            border: 4px solid #ffd700;
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: #ffd700;
+            color: #333;
+            padding: 5px 40px;
+            font-weight: bold;
+            transform: rotate(45deg);
+        }
+        
+        .plan-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+        
+        .plan-name {
+            font-size: 28px;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .plan-price {
+            font-size: 48px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .plan-price span {
+            font-size: 18px;
+            color: #666;
+        }
+        
+        .plan-desc {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .plan-features {
+            list-style: none;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        
+        .plan-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .plan-features li::before {
+            content: "✓";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .buy-btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .buy-btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .buy-btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .buy-btn-outline {
+            background: white;
+            color: #667eea;
+            border: 3px solid #667eea;
+        }
+        
+        .buy-btn-outline:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .faq {
+            background: white;
+            border-radius: 25px;
+            padding: 50px 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq h2 {
+            text-align: center;
+            font-size: 32px;
+            color: #667eea;
+            margin-bottom: 40px;
+        }
+        
+        .faq-item {
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .faq-question {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .faq-answer {
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+            opacity: 0.8;
+        }
+        
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            font-size: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .plan.popular {
+                transform: scale(1);
+            }
+            
+            .header h1 {
+                font-size: 32px;
+            }
+        }
+        
+        /* 文件拖拽区域样式 */
+        .upload-area {
+            border: 3px dashed #ddd;
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            margin: 30px 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .upload-area:hover {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.05);
+        }
+        
+        .upload-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+        
+        .upload-text {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .upload-hint {
+            color: #999;
+            font-size: 14px;
+        }
+        
+        .supported-formats {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .format-badge {
+            background: #f0f0f0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">🔄</div>
+        <h1>文件转换专家</h1>
+        <p>支持 100+ 种格式转换 - PDF、图片、文档、视频、音频</p>
+    </header>
+    
+    <div class="container">
+        <!-- 上传区域 -->
+        <div class="upload-area" id="uploadArea">
+            <div class="upload-icon">📁</div>
+            <div class="upload-text">拖拽文件到这里，或点击选择文件</div>
+            <div class="upload-hint">支持最大 500MB 文件</div>
+            <div class="supported-formats">
+                <span class="format-badge">📄 PDF</span>
+                <span class="format-badge">🖼️ 图片</span>
+                <span class="format-badge">📝 Word</span>
+                <span class="format-badge">📊 Excel</span>
+                <span class="format-badge">🎬 视频</span>
+                <span class="format-badge">🎵 音频</span>
+            </div>
+        </div>
+        
+        <!-- 功能特点 -->
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">极速转换</h3>
+                <p class="feature-desc">云端处理，最快几秒钟完成转换，不占用本地资源</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3 class="feature-title">安全加密</h3>
+                <p class="feature-desc">文件自动加密，转换完成后自动删除，保护隐私</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3 class="feature-title">多端支持</h3>
+                <p class="feature-desc">电脑、手机、平板随时随地使用</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3 class="feature-title">格式齐全</h3>
+                <p class="feature-desc">支持 100+ 种格式互转，满足所有需求</p>
+            </div>
+        </section>
+        
+        <!-- 订阅套餐 -->
+        <section class="pricing">
+            <h2>选择适合您的方案</h2>
+            <p class="pricing-subtitle">订阅制服务，随时可取消</p>
+            
+            <div class="plans">
+                <!-- 免费套餐 -->
+                <div class="plan">
+                    <div class="plan-icon">🆓</div>
+                    <h3 class="plan-name">免费体验</h3>
+                    <div class="plan-price">¥0 <span>/月</span></div>
+                    <p class="plan-desc">适合轻度使用</p>
+                    <ul class="plan-features">
+                        <li>每月 10 次转换</li>
+                        <li>单文件最大 10MB</li>
+                        <li>基础格式支持</li>
+                        <li>邮件客服支持</li>
+                    </ul>
+                    <a href="#" class="buy-btn buy-btn-outline" onclick="alert('请注册账户后使用免费版')">免费使用</a>
+                </div>
+                
+                <!-- 专业套餐 -->
+                <div class="plan popular">
+                    <div class="popular-badge">最受欢迎</div>
+                    <div class="plan-icon">⭐</div>
+                    <h3 class="plan-name">专业版</h3>
+                    <div class="plan-price">¥29 <span>/月</span></div>
+                    <p class="plan-desc">适合个人用户</p>
+                    <ul class="plan-features">
+                        <li>每月 500 次转换</li>
+                        <li>单文件最大 500MB</li>
+                        <li>全部格式支持</li>
+                        <li>优先客服响应</li>
+                        <li>历史记录保存</li>
+                    </ul>
+                    <!-- Wise 购买按钮 -->
+                    <a href="https://wise.com/pay/me/s7zc2uc" 
+                       class="buy-btn buy-btn-primary" 
+                       target="_blank">
+                        立即订阅
+                    </a>
+                </div>
+                
+                <!-- 企业套餐 -->
+                <div class="plan">
+                    <div class="plan-icon">🚀</div>
+                    <h3 class="plan-name">企业版</h3>
+                    <div class="plan-price">¥99 <span>/月</span></div>
+                    <p class="plan-desc">适合团队/企业</p>
+                    <ul class="plan-features">
+                        <li>无限转换次数</li>
+                        <li>单文件最大 2GB</li>
+                        <li>API 接口调用</li>
+                        <li>专属客服支持</li>
+                        <li>团队协作功能</li>
+                        <li>定制化服务</li>
+                    </ul>
+                    <!-- Lemon Squeezy 购买按钮 -->
+                    <a href="https://luming-files.lemonsqueezy.com/checkout/buy/0e587ed8-09f5-4f95-8e42-48f6ecbd95b4" 
+                       class="buy-btn buy-btn-primary" 
+                       target="_blank">
+                        联系我们
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 常见问题 -->
+        <section class="faq">
+            <h2>常见问题</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: 订阅后可以取消吗？</div>
+                <div class="faq-answer">A: 可以随时取消，取消后您仍可使用完当月服务。取消后不会自动续费。</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: 转换次数用完怎么办？</div>
+                <div class="faq-answer">A: 可以等待下月重置，或升级到更高版本获得更多转换次数。</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: 文件安全吗？</div>
+                <div class="faq-answer">A: 所有文件都采用加密传输，转换完成后自动从服务器删除，不会被任何人访问。</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: 支持哪些付款方式？</div>
+                <div class="faq-answer">A: 支持 Wise 转账，扫码即可付款。也支持微信/支付宝转账联系客服。</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: 可以开发票吗？</div>
+                <div class="faq-answer">A: 可以开具电子普通发票，付款后可在账户中申请。</div>
+            </div>
+        </section>
+    </div>
+    
+    <footer class="footer">
+        <p>© 2026 文件转换专家 - 文件转换服务</p>
+        <div class="payment-methods">
+            <span>💳</span>
+            <span>📱</span>
+            <span>🔐</span>
+        </div>
+        <p style="margin-top: 15px; font-size: 14px;">
+            Powered by Lemon Squeezy | 安全支付保障
+        </p>
+    </footer>
+    
+    <!-- 文件拖拽功能 -->
+    <script>
+        const uploadArea = document.getElementById('uploadArea');
+        
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '#667eea';
+            uploadArea.style.background = 'rgba(102, 126, 234, 0.1)';
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.style.borderColor = '#ddd';
+            uploadArea.style.background = 'transparent';
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '#ddd';
+            uploadArea.style.background = 'transparent';
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFiles(files);
+            }
+        });
+        
+        uploadArea.addEventListener('click', () => {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.multiple = true;
+            input.accept = '.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.jpeg,.png,.gif,.mp4,.avi,.mov,.mp3,.wav';
+            input.onchange = (e) => {
+                if (e.target.files.length > 0) {
+                    handleFiles(e.target.files);
+                }
+            };
+            input.click();
+        });
+        
+        function handleFiles(files) {
+            for (const file of files) {
+                console.log('准备转换文件:', file.name);
+                alert(`已选择文件: ${file.name}\n\n请先订阅专业版以使用完整功能！`);
+            }
+        }
+    </script>
+</body>
+</html>
